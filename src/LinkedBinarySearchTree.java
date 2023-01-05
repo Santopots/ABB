@@ -81,7 +81,7 @@ public class LinkedBinarySearchTree<K,V> implements  BinarySearchTree<K, V>{
         }
     }
 
-    private V get(Node<K,V> node, K key) {
+    public V get(Node<K,V> node, K key) {
         V keyValue = null;
         if (node == null) {
             return null;
