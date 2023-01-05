@@ -1,4 +1,5 @@
 import java.util.Comparator;
+import java.util.NoSuchElementException;
 
 public class LinkedBinarySearchTree<K,V> implements  BinarySearchTree<K, V>{
 
@@ -46,7 +47,6 @@ public class LinkedBinarySearchTree<K,V> implements  BinarySearchTree<K, V>{
     private LinkedBinarySearchTree(Comparator<? super K> comparator, Node<K, V> root) {
         this.root = root;
         this.comparator = comparator;
-
     }
     @Override
     public boolean isEmpty() {
@@ -74,18 +74,29 @@ public class LinkedBinarySearchTree<K,V> implements  BinarySearchTree<K, V>{
 
     @Override
     public V get(K key) {
-        return get(root, key);
+        if (key == null) {
+            throw new NullPointerException("clave nula");
+        } else {
+           return get(root, key);
+        }
     }
-    private Integer get(Node node, K key) {
+
+    private V get(Node<K,V> node, K key) {
+        V keyValue = null;
         if (node == null) {
             return null;
         }
-        if (key < node.key) {
-            return get(node.left, key);
-        } else if (key > node.key) {
-            return get(node.right, key);
+        if (comparator.compare(key, node.key) == 0) {
+            keyValue = node.value;
+        } else if (comparator.compare(key,node.key) > 0) {
+            get(node.left, key);
         } else {
-            return node.value;
+            get(node.right, key);
+        }
+        if (keyValue == null){
+            throw new NoSuchElementException("Clave no encontrada");
+        } else {
+            return keyValue;
         }
     }
 
