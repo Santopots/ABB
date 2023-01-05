@@ -81,25 +81,6 @@ public class LinkedBinarySearchTree<K,V> implements  BinarySearchTree<K, V>{
         }
     }
 
-    public V get(Node<K,V> node, K key) {
-        V keyValue = null;
-        if (node == null) {
-            return null;
-        }
-        if (comparator.compare(key, node.key) == 0) {
-            keyValue = node.value;
-        } else if (comparator.compare(key,node.key) > 0) {
-            get(node.left, key);
-        } else {
-            get(node.right, key);
-        }
-        if (keyValue == null){
-            throw new NoSuchElementException("Clave no encontrada");
-        } else {
-            return keyValue;
-        }
-    }
-
    @Override
     public BinarySearchTree<K, V> put(K key, V value) {
         root = put(root, key, value);
