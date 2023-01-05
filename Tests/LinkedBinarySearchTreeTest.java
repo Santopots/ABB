@@ -9,6 +9,8 @@ class LinkedBinarySearchTreeTest {
 //stack<Integer> empty = new LinkedStack<>();
 //assertThrows(NoSuchElementException.class, () -> { empty.top(); });
 //NoSuchElementException.class -> excepció que esperem
+
+
     @Test
     void putTest(){
         Comparator<Integer> cmp = Comparator.<Integer>naturalComparator();

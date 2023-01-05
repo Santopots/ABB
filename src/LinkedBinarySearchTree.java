@@ -48,29 +48,6 @@ public class LinkedBinarySearchTree<K,V> implements  BinarySearchTree<K, V>{
         this.comparator = comparator;
 
     }
-
-    @Override
-    public boolean isEmpty() {
-         // si no hi ha arrel, l'arbre estaria buit
-    }
-
-    @Override
-    public boolean containsKey(K key) {
-       return contains(key, root);
-    }
-    public boolean contains(K key, Node node) {
-        boolean found = false;
-        if (key == null) {
-            throw new NullPointerException();
-        } else if (comparator.compare(key, node.key) == 0) {
-            found = true;
-        } else if (found == false) {
-            contains(key,node.left);
-        } else {
-            contains(key, node.right);
-        }
-        return found;
-    }
     @Override
     public int compare(Node n1, Node n2){
         int k1 = (int) n1.getKey();
@@ -79,6 +56,32 @@ public class LinkedBinarySearchTree<K,V> implements  BinarySearchTree<K, V>{
         if (k1 > k2) return 1;
         else return 0;
     }
+
+    @Override
+    public boolean isEmpty() {
+         return root == null; // si no hi ha arrel, l'arbre estaria buit
+    }
+
+    @Override
+    public boolean containsKey(K key) {
+       return contains(key, root);
+    }
+
+    public boolean contains(K key, Node<K,V> node) {
+        int key1 = (int) node.key;
+        boolean found = false;
+        if (key == null) {
+            throw new NullPointerException();
+        } else if (comparator.compare(key, node.key) == 0 )  {
+            found = true;
+        } else if (!found) {
+            contains(key,node.left);
+        } else {
+            contains(key, node.right);
+        }
+        return found;
+    }
+
     @Override
     public V get(K key) {
         return null;
