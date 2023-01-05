@@ -29,18 +29,28 @@ public class LinkedBinarySearchTree<K,V> implements  BinarySearchTree<K, V>{
 
     }
 
-
     @Override
     public boolean isEmpty() {
         return root == null; // si no hi ha arrel, l'arbre estaria buit
     }
 
     @Override
-    public boolean containsKey(K ky) {
-        if(root == null) return false;
-        else return
+    public boolean containsKey(K key) {
+       return contains(key, root);
     }
-
+    public boolean contains(K key, Node node) {
+        boolean found = false;
+        if (key == null) {
+            throw new NullPointerException();
+        } else if (comparator.compare(key, root.key) == 0) {
+            found = true;
+        } else if (found == false) {
+            contains(key,node.left);
+        } else {
+            contains(key, node.right);
+        }
+        return found;
+    }
     @Override
     public V get(K key) {
         return null;
