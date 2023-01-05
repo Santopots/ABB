@@ -84,7 +84,19 @@ public class LinkedBinarySearchTree<K,V> implements  BinarySearchTree<K, V>{
 
     @Override
     public V get(K key) {
-        return null;
+        return get(root, key);
+    }
+    private Integer get(Node node, K key) {
+        if (node == null) {
+            return null;
+        }
+        if (key < node.key) {
+            return get(node.left, key);
+        } else if (key > node.key) {
+            return get(node.right, key);
+        } else {
+            return node.value;
+        }
     }
 
     @Override
