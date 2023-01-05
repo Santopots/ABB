@@ -23,7 +23,7 @@ public class LinkedBinarySearchTree<K,V> implements  BinarySearchTree<K, V>{
         root = null;
         this.comparator = comparator;
     }
-    public LinkedBinarySearchTree(Comparator<? super K> comparator, Node<K, V> root){
+    public LinkedBinarySearchTree(Comparator<? super K> comparator, Node<K, V> root) {
         this.root = root;
         this.comparator = comparator;
 
@@ -31,7 +31,7 @@ public class LinkedBinarySearchTree<K,V> implements  BinarySearchTree<K, V>{
 
     @Override
     public boolean isEmpty() {
-        return root == null; // si no hi ha arrel, l'arbre estaria buit
+         // si no hi ha arrel, l'arbre estaria buit
     }
 
     @Override
@@ -42,7 +42,7 @@ public class LinkedBinarySearchTree<K,V> implements  BinarySearchTree<K, V>{
         boolean found = false;
         if (key == null) {
             throw new NullPointerException();
-        } else if (comparator.compare(key, root.key) == 0) {
+        } else if (comparator.compare(key, node.key) == 0) {
             found = true;
         } else if (found == false) {
             contains(key,node.left);
