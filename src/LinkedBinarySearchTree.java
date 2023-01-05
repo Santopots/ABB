@@ -86,11 +86,11 @@ public class LinkedBinarySearchTree<K,V> implements  BinarySearchTree<K, V>{
     public V get(K key) {
         return get(root, key);
     }
-    private Integer get(Node node, K key) {
+    private V get(Node node, K key) {
         if (node == null) {
             return null;
         }
-        if (key < node.key) {
+        if (key < node.key) { //aqui amb el compare
             return get(node.left, key);
         } else if (key > node.key) {
             return get(node.right, key);
