@@ -18,6 +18,26 @@ public class LinkedBinarySearchTree<K,V> implements  BinarySearchTree<K, V>{
             this.left = left;
             this.right = right;
         }
+
+        public K getKey() {
+            return key;
+        }
+
+        public V getValue() {
+            return value;
+        }
+
+        public Node<K, V> getLeft() {
+            return left;
+        }
+
+        public Node<K, V> getRight() {
+            return right;
+        }
+
+        public int getSize() {
+            return size;
+        }
     }
     public LinkedBinarySearchTree(Comparator<? super K> comparator) {
         root = null;
@@ -52,15 +72,38 @@ public class LinkedBinarySearchTree<K,V> implements  BinarySearchTree<K, V>{
         return found;
     }
     @Override
+    public int compare(Node n1, Node n2){
+        int k1 = (int) n1.getKey();
+        int k2 =(int) n2.getKey();
+        if(k1 < k2) return -1;
+        if (k1 > k2) return 1;
+        else return 0;
+    }
+    @Override
     public V get(K key) {
         return null;
     }
 
     @Override
     public BinarySearchTree<K, V> put(K key, V value) {
-        return null;
+        root = put(root, key, value);
+        return this;
     }
 
+    private Node<K, V> put(Node<K, V> node, K key, V value) {
+        if (node == null) {
+            return new Node<>(key, value);
+        }
+        int cmp = comparator.compare(key, node.key);
+        if (cmp < 0) {
+            node = put(node.left, key, value);
+        } else if (cmp > 0) {
+            node = put(node.right, key, value);
+        } else {
+            node = value;
+        }
+        return node;
+    }
     @Override
     public BinarySearchTree<K, V> remove(K key) {
         return null;
