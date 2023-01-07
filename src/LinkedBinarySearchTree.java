@@ -1,7 +1,7 @@
 import java.util.Comparator;
 import java.util.NoSuchElementException;
 
-public class LinkedBinarySearchTree<K,V> implements  BinarySearchTree<K, V>{
+public class LinkedBinarySearchTree<K,V> implements  BinarySearchTree<K, V> {
 
     private final Node<K, V> root;
     private final Comparator<? super K> comparator;
