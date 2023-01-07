@@ -39,7 +39,7 @@ public class LinkedBinarySearchTree<K,V> implements  BinarySearchTree<K, V>{
         public int getSize() {
             return size;
         }
-    } //classe node5
+    } //classe node
     public LinkedBinarySearchTree(Comparator<? super K> comparator) {
         root = new Node<K,V>(null,null,null,null);
         this.comparator = comparator;
@@ -102,8 +102,9 @@ public class LinkedBinarySearchTree<K,V> implements  BinarySearchTree<K, V>{
 
    @Override
     public BinarySearchTree<K, V> put(K key, V value) {
-        root = put(root, key, value);
-        return this;
+        LinkedBinarySearchTree<K,V> b = new LinkedBinarySearchTree<K, V>(comparator, root);
+         b.put(root, key, value);
+        return b;
     }
 
     private Node<K, V> put(Node<K, V> node, K key, V value) {
@@ -136,9 +137,9 @@ public class LinkedBinarySearchTree<K,V> implements  BinarySearchTree<K, V>{
             return root;
 
         /* Otherwise, recur down the tree */
-        if (comparator.compare(key, root.key))
+        if (comparator.compare(key, root.key) == 1)
             root.left = deleteRec(root.left, key);
-        else if (key > root.key)
+        else if (comparator.compare(key,root.key)==)
             root.right = deleteRec(root.right, key);
 
             // if key is same as root's
@@ -164,9 +165,9 @@ public class LinkedBinarySearchTree<K,V> implements  BinarySearchTree<K, V>{
 
     int minValue(Node root)
     {
-        int minv = root.key;
+        int minv = (int) root.key;
         while (root.left != null) {
-            minv = root.left.key;
+            minv = (int) root.left.key;
             root = root.left;
         }
         return minv;
@@ -187,9 +188,9 @@ public class LinkedBinarySearchTree<K,V> implements  BinarySearchTree<K, V>{
         }
 
         /* Otherwise, recur down the tree */
-        if (key < root.key)
+        if (comparator.compare(key, root.key) < 0)
             root.left = insertRec(root.left, key);
-        else if (key > root.key)
+        else if (comparator.compare(key, root.key)> 0)
             root.right = insertRec(root.right, key);
 
         /* return the (unchanged) node pointer */
