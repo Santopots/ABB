@@ -16,5 +16,10 @@ public class Traversals {
             inorderRec(result, tree.right());
         }
     }
+
     public record Pair<F,S> (F first, S second) {}
+
+    public static <E> List <E> inorderIterative(BinaryTree<E> tree) {
+
+    }
 }
