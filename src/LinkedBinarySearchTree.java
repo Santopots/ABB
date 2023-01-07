@@ -80,9 +80,10 @@ public class LinkedBinarySearchTree<K,V> implements  BinarySearchTree<K, V>{
         if (node == null) {
             return null;
         }
-        if (key < node.key) { //aqui amb el compare
+        int cmp = comparator.compare(key,node.key);
+        if (cmp < 0 ) { //aqui amb el compare
             return get(node.left, key);
-        } else if (key > node.key) {
+        } else if (cmp > 0) {
             return get(node.right, key);
         } else {
             return node.value;
@@ -105,12 +106,13 @@ public class LinkedBinarySearchTree<K,V> implements  BinarySearchTree<K, V>{
         } else if (cmp > 0) {
             node = put(node.right, key, value);
         } else {
-            node = value;
+            node = (Node<K, V>) value;
         }
         return node;
     }
     @Override
     public BinarySearchTree<K, V> remove(K key) {
+
         return null;
     }
 }

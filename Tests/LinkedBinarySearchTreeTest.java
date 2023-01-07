@@ -22,7 +22,7 @@ class LinkedBinarySearchTreeTest  {
     }
     /*@Test
     void putTest(){
-        Comparator<Integer> cmp = Comparator.<Integer>naturalComparator();
+        Comparator<Integer> cmp = Comparator.<Integer>naturalOrder();
         LinkedBinaryTree<Integer, Integer> arb1 = new LinkedBinaryTree<>(cmp);
         arb1 = arb1
                 .put(4, 40)
