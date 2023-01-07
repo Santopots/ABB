@@ -1,4 +1,5 @@
 import java.util.Comparator;
+import java.util.NoSuchElementException;
 
 public class LinkedBinarySearchTree<K,V> implements  BinarySearchTree<K, V>{
 
@@ -46,7 +47,6 @@ public class LinkedBinarySearchTree<K,V> implements  BinarySearchTree<K, V>{
     private LinkedBinarySearchTree(Comparator<? super K> comparator, Node<K, V> root) {
         this.root = root;
         this.comparator = comparator;
-
     }
     @Override
     public boolean isEmpty() {
@@ -74,19 +74,29 @@ public class LinkedBinarySearchTree<K,V> implements  BinarySearchTree<K, V>{
 
     @Override
     public V get(K key) {
-        return get(root, key);
+        if (key == null) {
+            throw new NullPointerException("clave nula");
+        } else {
+           return get(root, key);
+        }
     }
-    private V get(Node node, K key) {
-        if (node == null) {
+
+    public V get(Node<K,V> node, K key) {
+        V keyValue = null;
+        if(node == null) {
             return null;
         }
-        int cmp = comparator.compare(key,node.key);
-        if (cmp < 0 ) { //aqui amb el compare
-            return get(node.left, key);
-        } else if (cmp > 0) {
-            return get(node.right, key);
+        if (comparator.compare(key, node.key) == 0) {
+            keyValue = node.value;
+        } else if (comparator.compare(key, node.key) > 0) {
+            get(node.left, key);
         } else {
-            return node.value;
+            get(node.right, key);
+        }
+        if (keyValue == null) {
+            throw new NoSuchElementException("Clave no encontrada");
+        } else {
+            return keyValue;
         }
     }
 
@@ -106,13 +116,12 @@ public class LinkedBinarySearchTree<K,V> implements  BinarySearchTree<K, V>{
         } else if (cmp > 0) {
             node = put(node.right, key, value);
         } else {
-            node = (Node<K, V>) value;
+            node = value;
         }
         return node;
     }
     @Override
     public BinarySearchTree<K, V> remove(K key) {
-
         return null;
     }
 }
