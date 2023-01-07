@@ -1,7 +1,7 @@
 import java.util.Comparator;
 import java.util.NoSuchElementException;
 
-public class LinkedBinarySearchTree<K,V> implements  BinarySearchTree<K, V> {
+public class LinkedBinarySearchTree<K,V> implements  BinarySearchTree<K, V>, BinaryTree<Traversals.Pair<K,V>> {
 
     private final Node<K, V> root;
     private final Comparator<? super K> comparator;
@@ -51,6 +51,30 @@ public class LinkedBinarySearchTree<K,V> implements  BinarySearchTree<K, V> {
     @Override
     public boolean isEmpty() {
          return root == null; // si no hi ha arrel, l'arbre estaria buit
+    }
+
+    @Override
+    public Traversals.Pair<K, V> root() {
+        if (root == null) {
+            throw new NoSuchElementException("Root null");
+        }
+        return new Traversals.Pair<>(root.key, root.value);
+    }
+
+    @Override
+    public LinkedBinarySearchTree<K,V> left () {
+        if (root == null) {
+            throw new NoSuchElementException("Root null");
+        }
+        return new LinkedBinarySearchTree<K,V>(comparator, root.left);
+    }
+
+    @Override
+    public BinaryTree<Traversals.Pair<K, V>> right() {
+        if(root == null) {
+            throw new NoSuchElementException("Root null");
+        }
+        return new LinkedBinarySearchTree<K,V>(comparator, root.right);
     }
 
     @Override
