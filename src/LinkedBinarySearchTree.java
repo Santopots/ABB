@@ -124,19 +124,19 @@ public class LinkedBinarySearchTree<K,V> implements  BinarySearchTree<K, V>{
     public BinarySearchTree<K, V> remove(K key) {
 
     }
-    void deleteKey(int key) { root = deleteRec(root, key); }
+    void deleteKey(K key) { root = deleteRec(root, key); }
 
     /* A recursive function to
       delete an existing key in BST
      */
-    Node deleteRec(Node root, int key)
+    Node deleteRec(Node root, K key)
     {
         /* Base Case: If the tree is empty */
         if (root == null)
             return root;
 
         /* Otherwise, recur down the tree */
-        if (key < root.key)
+        if (comparator.compare(key, root.key))
             root.left = deleteRec(root.left, key);
         else if (key > root.key)
             root.right = deleteRec(root.right, key);
@@ -179,7 +179,6 @@ public class LinkedBinarySearchTree<K,V> implements  BinarySearchTree<K, V>{
        insert a new key in BST */
     Node insertRec(Node root, int key)
     {
-
         /* If the tree is empty,
           return a new node */
         if (root == null) {
